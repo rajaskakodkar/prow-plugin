@@ -1,3 +1,44 @@
+---
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: PackageMetadata
+metadata:
+  name: deck.community.tanzu.vmware.com
+spec:
+  displayName: "deck"
+  longDescription: ""
+  shortDescription: ""
+  providerName: VMware
+  maintainers:
+    - name: ""
+  categories:
+    - ""
+---
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: deck.community.tanzu.vmware.com.0.1.0
+spec:
+  refName: deck.community.tanzu.vmware.com
+  version: 0.1.0
+  releaseNotes: "relevant release notes..."
+  licenses:
+    - "UNKNOWN"
+  template:
+    spec:
+      fetch:
+        - imgpkgBundle:
+            image: public.ecr.aws/t0q8k6g2/prow-plugin/deck@sha256:6482e2e473b69240e98f063948576f8bcccf4689d8e653b0c84df9909baa9f33
+      template:
+        - ytt:
+            paths:
+              - config/
+        - kbld:
+            paths:
+              - "-"
+              - .imgpkg/images.yml
+      deploy:
+        - kapp: {}
+---
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: PackageMetadata
 metadata:
@@ -46,5 +87,204 @@ spec:
               - .imgpkg/images.yml
       deploy:
         - kapp: {}
----
 
+---
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: PackageMetadata
+metadata:
+  name: horologium.community.tanzu.vmware.com
+spec:
+  displayName: "horologium"
+  longDescription: ""
+  shortDescription: ""
+  providerName: VMware
+  maintainers:
+    - name: ""
+  categories:
+    - ""
+---
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: horologium.community.tanzu.vmware.com.0.1.0
+spec:
+  refName: horologium.community.tanzu.vmware.com
+  version: 0.1.0
+  releaseNotes: "relevant release notes..."
+  licenses:
+    - "UNKNOWN"
+  template:
+    spec:
+      fetch:
+        - imgpkgBundle:
+            image: # Get this value by pushing to your OCI Registry
+      template:
+        - ytt:
+            paths:
+              - config/
+        - kbld:
+            paths:
+              - "-"
+              - .imgpkg/images.yml
+      deploy:
+        - kapp: {}
+---
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: PackageMetadata
+metadata:
+  name: prow-cm.community.tanzu.vmware.com
+spec:
+  displayName: "prow-cm"
+  longDescription: "Prow Controller Manager"
+  shortDescription: "PROW Controller Manager"
+  providerName: VMware
+  maintainers:
+    - name: "Hackapalooza"
+  categories:
+    - "ci"
+---
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: prow-cm.community.tanzu.vmware.com.0.1.0
+spec:
+  refName: prow-cm.community.tanzu.vmware.com
+  version: 0.1.0
+  releaseNotes: "relevant release notes..."
+  licenses:
+    - "UNKNOWN"
+  template:
+    spec:
+      fetch:
+        - imgpkgBundle:
+            image: # Get this value by pushing to your OCI Registry
+      template:
+        - ytt:
+            paths:
+              - config/
+        - kbld:
+            paths:
+              - "-"
+              - .imgpkg/images.yml
+      deploy:
+        - kapp: {}
+---
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: PackageMetadata
+metadata:
+  name: sinker.community.tanzu.vmware.com
+spec:
+  displayName: "sinker"
+  longDescription: "PROW Sinker"
+  shortDescription: "PROW Sinker"
+  providerName: VMware
+  maintainers:
+    - name: "Hackapalooza"
+  categories:
+    - "ci"
+---
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: sinker.community.tanzu.vmware.com.0.1.0
+spec:
+  refName: sinker.community.tanzu.vmware.com
+  version: 0.1.0
+  releaseNotes: "relevant release notes..."
+  licenses:
+    - "UNKNOWN"
+  template:
+    spec:
+      fetch:
+        - imgpkgBundle:
+            image: # Get this value by pushing to your OCI Registry
+      template:
+        - ytt:
+            paths:
+              - config/
+        - kbld:
+            paths:
+              - "-"
+              - .imgpkg/images.yml
+      deploy:
+        - kapp: {}
+---
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: PackageMetadata
+metadata:
+  name: statusreconciler.community.tanzu.vmware.com
+spec:
+  displayName: "statusreconciler"
+  longDescription: "PROW Status Reconciler"
+  shortDescription: "PROW Status Reconciler"
+  providerName: VMware
+  maintainers:
+    - name: "Hackapalooza"
+  categories:
+    - "ci"
+---
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: statusreconciler.community.tanzu.vmware.com.0.1.0
+spec:
+  refName: statusreconciler.community.tanzu.vmware.com
+  version: 0.1.0
+  releaseNotes: "status reconciler release"
+  licenses:
+    - "UNKNOWN"
+  template:
+    spec:
+      fetch:
+        - imgpkgBundle:
+            image: # Get this value by pushing to your OCI Registry
+      template:
+        - ytt:
+            paths:
+              - config/
+        - kbld:
+            paths:
+              - "-"
+              - .imgpkg/images.yml
+      deploy:
+        - kapp: {}
+---
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: PackageMetadata
+metadata:
+  name: tide.community.tanzu.vmware.com
+spec:
+  displayName: "tide"
+  longDescription: "PROW tide"
+  shortDescription: "PROW tide"
+  providerName: VMware
+  maintainers:
+    - name: "Hackapalooza"
+  categories:
+    - "ci"
+---
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: tide.community.tanzu.vmware.com.0.1.0
+spec:
+  refName: tide.community.tanzu.vmware.com
+  version: 0.1.0
+  releaseNotes: "tide release"
+  licenses:
+    - "UNKNOWN"
+  template:
+    spec:
+      fetch:
+        - imgpkgBundle:
+            image: # Get this value by pushing to your OCI Registry
+      template:
+        - ytt:
+            paths:
+              - config/
+        - kbld:
+            paths:
+              - "-"
+              - .imgpkg/images.yml
+      deploy:
+        - kapp: {}

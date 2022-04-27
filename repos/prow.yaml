@@ -1,0 +1,23 @@
+packages:
+  - name: deck
+    versions:
+      - 0.1.0
+  - name: crier
+    versions:
+      - 0.1.0
+  - name: horologium
+    versions:
+      - 0.1.0
+  - name: prow-cm
+    versions:
+      - 0.1.0
+  - name: sinker
+    versions:
+      - 0.1.0
+  - name: statusreconciler
+    versions:
+      - 0.1.0
+  - name: tide
+    versions:
+      - 0.1.0
+

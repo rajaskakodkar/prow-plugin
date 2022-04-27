@@ -1,0 +1,9 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - manual: {}
+    path: deck_deployment.yaml
+  - manual: {}
+    path: deck_rbac.yaml
+  path: config/upstream
+kind: LockConfig

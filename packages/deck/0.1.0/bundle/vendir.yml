@@ -1,0 +1,11 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+minimumRequiredVersion: 0.12.0
+directories:
+  - path: config/upstream
+    contents:
+      - path: deck_deployment.yaml
+        manual: {}
+      - path: deck_rbac.yaml
+        manual: {}
+

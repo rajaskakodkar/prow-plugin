@@ -2,9 +2,6 @@
 apiVersion: imgpkg.carvel.dev/v1alpha1
 images:
 - annotations:
-    kbld.carvel.dev/id: public.ecr.aws/t0q8k6g2/prow-plugin/crier@sha256:94ef0bf08043d403c7e22585747a497e98a0629308b226c56847a1e5aa6f6107
-  image: public.ecr.aws/t0q8k6g2/prow-plugin/crier@sha256:94ef0bf08043d403c7e22585747a497e98a0629308b226c56847a1e5aa6f6107
-- annotations:
     kbld.carvel.dev/id: public.ecr.aws/t0q8k6g2/prow-plugin/deck@sha256:6482e2e473b69240e98f063948576f8bcccf4689d8e653b0c84df9909baa9f33
   image: public.ecr.aws/t0q8k6g2/prow-plugin/deck@sha256:6482e2e473b69240e98f063948576f8bcccf4689d8e653b0c84df9909baa9f33
 kind: ImagesLock
