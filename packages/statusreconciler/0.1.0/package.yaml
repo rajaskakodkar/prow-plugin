@@ -5,7 +5,7 @@ metadata:
 spec:
   refName: statusreconciler.community.tanzu.vmware.com
   version: 0.1.0
-  releaseNotes: "relevant release notes..."
+  releaseNotes: "status reconciler release"
   licenses:
     - "UNKNOWN"
   template:

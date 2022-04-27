@@ -1,0 +1,9 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - manual: {}
+    path: prow-controller-manager_deployment.yaml
+  - manual: {}
+    path: prow-controller-manager_rbac.yaml
+  path: config/upstream
+kind: LockConfig

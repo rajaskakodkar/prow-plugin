@@ -4,10 +4,7 @@ minimumRequiredVersion: 0.12.0
 directories:
   - path: config/upstream
     contents:
-      - path: .
-        githubRelease:
-          slug: INFO_NEEDED
-          tag: INFO_NEEDED
-          disableAutoChecksumValidation: true
-        includePaths:
-          - prow-cm.yaml
+      - path: prow-controller-manager_deployment.yaml
+        manual: {}
+      - path: prow-controller-manager_rbac.yaml
+        manual: {}

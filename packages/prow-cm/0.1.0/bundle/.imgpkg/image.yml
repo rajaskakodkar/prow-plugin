@@ -1,0 +1,11 @@
+---
+apiVersion: imgpkg.carvel.dev/v1alpha1
+images:
+- annotations:
+    kbld.carvel.dev/id: gcr.io/k8s-prow/prow-controller-manager:v20220331-c4e1c201d5
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v20220331-c4e1c201d5
+          url: gcr.io/k8s-prow/prow-controller-manager:v20220331-c4e1c201d5
+  image: gcr.io/k8s-prow/prow-controller-manager@sha256:d996923291c94c80274206062c70c2debb08f4a845054fcfe6068eaf862cb5c0
+kind: ImagesLock

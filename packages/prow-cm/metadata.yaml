@@ -4,10 +4,10 @@ metadata:
   name: prow-cm.community.tanzu.vmware.com
 spec:
   displayName: "prow-cm"
-  longDescription: ""
-  shortDescription: ""
+  longDescription: "Prow Controller Manager"
+  shortDescription: "PROW Controller Manager"
   providerName: VMware
   maintainers:
-    - name: ""
+    - name: "Hackapalooza"
   categories:
-    - ""
+    - "ci"

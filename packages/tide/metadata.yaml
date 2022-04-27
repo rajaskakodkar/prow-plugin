@@ -4,10 +4,10 @@ metadata:
   name: tide.community.tanzu.vmware.com
 spec:
   displayName: "tide"
-  longDescription: ""
-  shortDescription: ""
+  longDescription: "PROW tide"
+  shortDescription: "PROW tide"
   providerName: VMware
   maintainers:
-    - name: ""
+    - name: "Hackapalooza"
   categories:
-    - ""
+    - "ci"
