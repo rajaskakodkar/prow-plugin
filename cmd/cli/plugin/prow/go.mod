@@ -12,6 +12,7 @@ require (
 	github.com/golangci/golangci-lint v1.43.0
 	github.com/spf13/cobra v1.3.0
 	github.com/vmware-tanzu/tanzu-framework v1.4.0-pre-alpha-2.0.20220119234741-712b1ad45604
+	k8s.io/client-go v0.22.2
 )
 
 require (
@@ -84,6 +85,7 @@ require (
 	github.com/fatih/structtag v1.2.0 // indirect
 	github.com/fsnotify/fsnotify v1.5.1 // indirect
 	github.com/fzipp/gocyclo v0.3.1 // indirect
+	github.com/getkin/kin-openapi v0.66.0 // indirect
 	github.com/ghodss/yaml v1.0.0 // indirect
 	github.com/go-critic/go-critic v0.6.1 // indirect
 	github.com/go-logr/logr v0.4.0 // indirect
@@ -232,6 +234,7 @@ require (
 	github.com/uudashr/gocognit v1.0.5 // indirect
 	github.com/vito/go-interact v0.0.0-20171111012221-fa338ed9e9ec // indirect
 	github.com/vmware-tanzu/carvel-kapp-controller v0.25.0 // indirect
+	github.com/vmware-tanzu/carvel-secretgen-controller v0.5.0 // indirect
 	github.com/vmware-tanzu/carvel-vendir v0.23.0 // indirect
 	github.com/vmware/govmomi v0.27.1 // indirect
 	github.com/yalp/jsonpath v0.0.0-20180802001716-5cc68e5049a0 // indirect
@@ -265,7 +268,6 @@ require (
 	k8s.io/api v0.22.2 // indirect
 	k8s.io/apiextensions-apiserver v0.22.2 // indirect
 	k8s.io/apimachinery v0.22.2 // indirect
-	k8s.io/client-go v0.22.2 // indirect
 	k8s.io/cluster-bootstrap v0.22.2 // indirect
 	k8s.io/component-base v0.22.2 // indirect
 	k8s.io/klog/v2 v2.10.0 // indirect

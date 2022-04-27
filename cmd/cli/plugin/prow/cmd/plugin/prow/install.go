@@ -24,12 +24,15 @@ func installProw(cmd *cobra.Command, _ []string) error {
 		kubeConfig = getDefaultKubeconfigPath()
 	)
 
-	kubeClientset := getClientSet(kubeConfig)
-	fmt.Println(kubeClientset)
+	// Install required secrets
+	createRequiredSecrets(kubeConfig)
 
+	// Install repository
 	if err := installProwRepo(kubeConfig); err != nil {
 		return fmt.Errorf("install prow repo: %w", err)
 	}
+
+	// Install packages
 
 	return nil
 }
