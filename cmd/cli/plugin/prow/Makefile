@@ -25,7 +25,7 @@ ARTIFACTS_DIR ?= ./artifacts
 TANZU_PLUGIN_PUBLISH_PATH ?= $(ARTIFACTS_DIR)/published
 
 # Add list of plugins separated by space
-PLUGINS ?= ""
+PLUGINS ?= "prow"
 
 # Add supported OS-ARCHITECTURE combinations here
 ENVS ?= linux-amd64 windows-amd64 darwin-amd64
@@ -36,7 +36,6 @@ PUBLISH_JOBS := $(addprefix publish-,${ENVS})
 go.mod go.sum: $(GO_SRCS)
 	go mod download
 	go mod tidy
-
 .PHONY: build-local
 build-local: ## Build the plugin
 	tanzu builder cli compile --version $(BUILD_VERSION) --ldflags "$(LD_FLAGS)" --path ./cmd/plugin --target local --artifacts artifacts/${GOHOSTOS}/${GOHOSTARCH}/cli
