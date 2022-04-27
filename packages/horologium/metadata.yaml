@@ -1,0 +1,13 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: PackageMetadata
+metadata:
+  name: horologium.community.tanzu.vmware.com
+spec:
+  displayName: "horologium"
+  longDescription: ""
+  shortDescription: ""
+  providerName: VMware
+  maintainers:
+    - name: ""
+  categories:
+    - ""

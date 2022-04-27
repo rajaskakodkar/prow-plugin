@@ -1,0 +1,25 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: PACKAGE_NAME.community.tanzu.vmware.com.VERSION
+spec:
+  refName: PACKAGE_NAME.community.tanzu.vmware.com
+  version: VERSION
+  releaseNotes: "relevant release notes..."
+  licenses:
+    - "UNKNOWN"
+  template:
+    spec:
+      fetch:
+        - imgpkgBundle:
+            image: # Get this value by pushing to your OCI Registry
+      template:
+        - ytt:
+            paths:
+              - config/
+        - kbld:
+            paths:
+              - "-"
+              - .imgpkg/images.yml
+      deploy:
+        - kapp: {}
