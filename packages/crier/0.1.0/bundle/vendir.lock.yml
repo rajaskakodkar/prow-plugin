@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: 'Merge pull request #26104 from zachmandeville/update-snoop-gate...'
-      sha: 62357eed5f847c88bc742467896d4cfde6cab877
+      commitTitle: 'Merge pull request #63 from rajaskakodkar/prow-poc-infra-migration...'
+      sha: e3ef2d9d36f5c2616ae24213727e6355df739850
     path: .
   path: config/upstream
 kind: LockConfig

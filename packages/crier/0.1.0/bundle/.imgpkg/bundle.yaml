@@ -1,0 +1,9 @@
+apiVersion: imgpkg.carvel.dev/v1alpha1
+kind: Bundle
+metadata:
+  name: crier
+authors:
+  - name: Rajas Kakodkar
+    email: rkakodkar@vmware.com
+websites:
+  - url: github.com/rajaskakodkar/tanzu-test-infra

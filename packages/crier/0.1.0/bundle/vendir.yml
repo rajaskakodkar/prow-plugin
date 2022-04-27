@@ -6,10 +6,9 @@ directories:
     contents:
       - path: .
         git:
-          url: https://github.com/kubernetes/test-infra
-          ref: origin/master
+          url: https://github.com/rajaskakodkar/tanzu-test-infra
+          ref: origin/main
         includePaths:
         - config/prow/cluster/crier_deployment.yaml
-        - config/prow/cluster/crier_service.yaml
         - config/prow/cluster/crier_rbac.yaml
 

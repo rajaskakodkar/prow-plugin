@@ -1,0 +1,12 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: PackageMetadata
+metadata:
+  name: crier.prow.plugin
+spec:
+  displayName: "crier"
+  longDescription: "Prow Component"
+  shortDescription: "prow component"
+  maintainers:
+    - name: Rajas Kakodkar
+  categories:
+    - "prow"

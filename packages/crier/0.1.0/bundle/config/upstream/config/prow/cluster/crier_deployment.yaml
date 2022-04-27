@@ -1,21 +1,8 @@
-# Copyright 2019 The Kubernetes Authors All rights reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: default
+  namespace: prow
   name: crier
   labels:
     app: crier
@@ -33,22 +20,26 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: crier
-        image: gcr.io/k8s-prow/crier:v20220426-a5244a12a8
+        image: gcr.io/k8s-prow/crier:v20220331-c4e1c201d5
         args:
-        - --blob-storage-workers=1
+        - --blob-storage-workers=10
         - --config-path=/etc/config/config.yaml
+        - --job-config-path=/etc/job-config
+        - --gcs-credentials-file=/etc/gcs-credentials/service-account.json
         - --github-endpoint=http://ghproxy
         - --github-endpoint=https://api.github.com
-        - --github-token-path=/etc/github/oauth
-        - --github-workers=5
-        - --job-config-path=/etc/job-config
-        - --kubernetes-blob-storage-workers=1
-        - --slack-token-file=/etc/slack/token
-        - --slack-workers=1
+        - --github-workers=10
+        - --kubernetes-blob-storage-workers=10
+        - --github-app-id=$(GITHUB_APP_ID)
+        - --github-app-private-key-path=/etc/github/cert
         env:
-        # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
         - name: KUBECONFIG
-          value: "/etc/kubeconfig/config:/etc/kubeconfig-build-test-infra-trusted/kubeconfig"
+          value: "/etc/kubeconfig/config:/etc/kubeconfig/config"
+        - name: GITHUB_APP_ID
+          valueFrom:
+            secretKeyRef:
+              name: github-token
+              key: appid
         ports:
         - name: metrics
           containerPort: 9090
@@ -56,39 +47,32 @@ spec:
         - mountPath: /etc/kubeconfig
           name: kubeconfig
           readOnly: true
-        - mountPath: /etc/kubeconfig-build-test-infra-trusted
-          name: kubeconfig-build-test-infra-trusted
-          readOnly: true
         - name: config
           mountPath: /etc/config
           readOnly: true
         - name: job-config
           mountPath: /etc/job-config
           readOnly: true
-        - name: oauth
+        - name: github-token
           mountPath: /etc/github
           readOnly: true
-        - name: slack
-          mountPath: /etc/slack
+        - name: gcs-credentials
+          mountPath: /etc/gcs-credentials
           readOnly: true
       volumes:
+      - name: kubeconfig
+        secret:
+          defaultMode: 420
+          secretName: kubeconfig
       - name: config
         configMap:
           name: config
       - name: job-config
         configMap:
           name: job-config
-      - name: oauth
+      - name: github-token
         secret:
-          secretName: oauth-token
-      - name: slack
+          secretName: github-token
+      - name: gcs-credentials
         secret:
-          secretName: slack-token
-      - name: kubeconfig
-        secret:
-          defaultMode: 420
-          secretName: kubeconfig
-      - name: kubeconfig-build-test-infra-trusted
-        secret:
-          defaultMode: 420
-          secretName: kubeconfig-build-test-infra-trusted
+          secretName: gcs-credentials
