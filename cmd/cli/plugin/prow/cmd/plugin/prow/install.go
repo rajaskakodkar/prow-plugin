@@ -2,11 +2,10 @@ package main
 
 import (
 	"fmt"
-	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/tools/clientcmd"
-	"os"
 
 	"github.com/spf13/cobra"
+
+	"github.com/vmware-tanzu/tanzu-framework/pkg/v1/tkg/tkgpackageclient"
 )
 
 var InstallCmd = &cobra.Command{
@@ -18,37 +17,38 @@ var InstallCmd = &cobra.Command{
 	RunE: installProw,
 }
 
+// installProw will install the pro repo, its package bundles, and the
+// prerequisites like secrets on a workload cluster.
 func installProw(cmd *cobra.Command, _ []string) error {
 	var (
 		kubeConfig = getDefaultKubeconfigPath()
 	)
 
-	clientset := getClientSet(kubeConfig)
-	fmt.Println(clientset)
+	kubeClientset := getClientSet(kubeConfig)
+	fmt.Println(kubeClientset)
 
-	fmt.Println("One day, some day soon? Install Prow, the repo, all the repo package bundles, and its prerequisites on a workload cluster.")
+	if err := installProwRepo(kubeConfig); err != nil {
+		return fmt.Errorf("install prow repo: %w", err)
+	}
+
 	return nil
 }
 
-func getClientSet(kubeConfig string) *kubernetes.Clientset {
-	config, err := clientcmd.BuildConfigFromFlags("", kubeConfig)
+func installProwRepo(kubeconfig string) error {
+	_, err := tkgpackageclient.NewTKGPackageClient(kubeconfig)
 	if err != nil {
-		panic(err)
+		return fmt.Errorf("create TKG package client: %w", err)
 	}
 
-	clientset, err := kubernetes.NewForConfig(config)
-	if err != nil {
-		panic(err)
-	}
+	// AddRepository validates the provided input and adds the package repository CR to the cluster
+	// func (p *pkgClient) AddRepository(
+	// o             *tkgpackagedatamodel.RepositoryOptions,
+	// progress      *tkgpackagedatamodel.PackageProgress,
+	// operationType tkgpackagedatamodel.OperationType
+	// ) {
+	// 	p.addRepository(o, progress, operationType)
+	// }
 
-	return clientset
-}
-
-func getDefaultKubeconfigPath() string {
-	kubeConfigFilename := os.Getenv(clientcmd.RecommendedConfigPathEnvVar)
-	// fallback to default kubeconfig file location if no env variable set
-	if kubeConfigFilename == "" {
-		kubeConfigFilename = clientcmd.RecommendedHomeFile
-	}
-	return kubeConfigFilename
+	// tkgPkgClient.AddRepository()
+	return nil
 }
