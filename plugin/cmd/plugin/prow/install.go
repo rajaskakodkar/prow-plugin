@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/vmware-tanzu/tanzu-framework/pkg/v1/tkg/tkgpackageclient"
+	"github.com/vmware-tanzu/tanzu-framework/pkg/v1/tkg/tkgpackagedatamodel"
 )
 
 var InstallCmd = &cobra.Command{
@@ -37,21 +38,25 @@ func installProw(cmd *cobra.Command, _ []string) error {
 	return nil
 }
 
-func installProwRepo(kubeconfig string) error {
-	_, err := tkgpackageclient.NewTKGPackageClient(kubeconfig)
+func installProwRepo(kubeConfig string) error {
+	repoOpts := &tkgpackagedatamodel.RepositoryOptions{
+		RepositoryURL: "public.ecr.aws/t0q8k6g2/repo/prow@sha256:03b1bd5e1c3ec75cd66984038307db7d9dd5c2e4cea65b13ff99f2b064b3a153",
+		RepositoryName: "prow",
+		Namespace: "default",
+	}
+
+	progress := &tkgpackagedatamodel.PackageProgress{
+		ProgressMsg: make(chan string, 10),
+		Err:         make(chan error),
+		Done:        make(chan struct{}),
+	}
+
+
+	tkgPkgClient, err := tkgpackageclient.NewTKGPackageClient(kubeConfig)
 	if err != nil {
 		return fmt.Errorf("create TKG package client: %w", err)
 	}
 
-	// AddRepository validates the provided input and adds the package repository CR to the cluster
-	// func (p *pkgClient) AddRepository(
-	// o             *tkgpackagedatamodel.RepositoryOptions,
-	// progress      *tkgpackagedatamodel.PackageProgress,
-	// operationType tkgpackagedatamodel.OperationType
-	// ) {
-	// 	p.addRepository(o, progress, operationType)
-	// }
-
-	// tkgPkgClient.AddRepository()
+	tkgPkgClient.AddRepository(repoOpts, progress, tkgpackagedatamodel.OperationTypeInstall)
 	return nil
 }
