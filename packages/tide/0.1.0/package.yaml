@@ -5,7 +5,7 @@ metadata:
 spec:
   refName: tide.community.tanzu.vmware.com
   version: 0.1.0
-  releaseNotes: "relevant release notes..."
+  releaseNotes: "tide release"
   licenses:
     - "UNKNOWN"
   template:

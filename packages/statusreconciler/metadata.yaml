@@ -4,10 +4,10 @@ metadata:
   name: statusreconciler.community.tanzu.vmware.com
 spec:
   displayName: "statusreconciler"
-  longDescription: ""
-  shortDescription: ""
+  longDescription: "PROW Status Reconciler"
+  shortDescription: "PROW Status Reconciler"
   providerName: VMware
   maintainers:
-    - name: ""
+    - name: "Hackapalooza"
   categories:
-    - ""
+    - "ci"

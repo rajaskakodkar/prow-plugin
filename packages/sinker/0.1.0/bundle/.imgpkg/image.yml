@@ -1,0 +1,11 @@
+---
+apiVersion: imgpkg.carvel.dev/v1alpha1
+images:
+- annotations:
+    kbld.carvel.dev/id: gcr.io/k8s-prow/sinker:v20220331-c4e1c201d5
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v20220331-c4e1c201d5
+          url: gcr.io/k8s-prow/sinker:v20220331-c4e1c201d5
+  image: gcr.io/k8s-prow/sinker@sha256:caad62759de4d0a833eb4b69e49f3a9d8d8d765b80277e2fe23354a04eb3e76d
+kind: ImagesLock

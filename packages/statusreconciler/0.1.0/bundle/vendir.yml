@@ -4,10 +4,7 @@ minimumRequiredVersion: 0.12.0
 directories:
   - path: config/upstream
     contents:
-      - path: .
-        githubRelease:
-          slug: INFO_NEEDED
-          tag: INFO_NEEDED
-          disableAutoChecksumValidation: true
-        includePaths:
-          - statusreconciler.yaml
+      - path: statusreconciler_deployment.yaml
+        manual: {}
+      - path: statusreconciler_rbac.yaml
+        manual: {}

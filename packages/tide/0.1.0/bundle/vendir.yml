@@ -4,10 +4,7 @@ minimumRequiredVersion: 0.12.0
 directories:
   - path: config/upstream
     contents:
-      - path: .
-        githubRelease:
-          slug: INFO_NEEDED
-          tag: INFO_NEEDED
-          disableAutoChecksumValidation: true
-        includePaths:
-          - tide.yaml
+      - path: tide_deployment.yaml
+        manual: {}
+      - path: tide_rbac.yaml
+        manual: {}

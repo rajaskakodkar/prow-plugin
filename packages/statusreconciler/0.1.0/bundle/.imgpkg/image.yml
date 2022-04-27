@@ -1,0 +1,11 @@
+---
+apiVersion: imgpkg.carvel.dev/v1alpha1
+images:
+- annotations:
+    kbld.carvel.dev/id: gcr.io/k8s-prow/status-reconciler:v20220331-c4e1c201d5
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v20220331-c4e1c201d5
+          url: gcr.io/k8s-prow/status-reconciler:v20220331-c4e1c201d5
+  image: gcr.io/k8s-prow/status-reconciler@sha256:8dc3e98e73994f37370897562d37c4e8dd23e1a1dd57930d0874dc0ccd51fab6
+kind: ImagesLock

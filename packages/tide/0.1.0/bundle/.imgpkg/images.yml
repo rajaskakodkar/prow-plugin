@@ -1,0 +1,13 @@
+---
+apiVersion: imgpkg.carvel.dev/v1alpha1
+images:
+- annotations:
+    kbld.carvel.dev/id: gcr.io/k8s-prow/tide:v20220331-c4e1c201d5
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v20220331-c4e1c201d5
+          url: gcr.io/k8s-prow/tide:v20220331-c4e1c201d5
+      - preresolved:
+          url: gcr.io/k8s-prow/tide@sha256:e157fbb0b7fb2bab7a6e1617a7b3a743de6ddaab5d6785abb9f2b48cfcb7e46d
+  image: gcr.io/k8s-prow/tide@sha256:e157fbb0b7fb2bab7a6e1617a7b3a743de6ddaab5d6785abb9f2b48cfcb7e46d
+kind: ImagesLock
