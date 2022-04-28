@@ -6,6 +6,8 @@ import (
 
 	"github.com/spf13/cobra"
 
+	kappipkg "github.com/vmware-tanzu/carvel-kapp-controller/pkg/apis/packaging/v1alpha1"
+
 	"github.com/vmware-tanzu/tanzu-framework/pkg/v1/tkg/tkgpackageclient"
 	"github.com/vmware-tanzu/tanzu-framework/pkg/v1/tkg/tkgpackagedatamodel"
 )
@@ -60,8 +62,8 @@ func installProw(cmd *cobra.Command, _ []string) error {
 	}
 
 	// Install repository
-	err := checkProwRepo(kubeConfig)
-	if err != nil {
+	packageRepo, err := checkProwRepo(kubeConfig)
+	if err == nil && packageRepo == nil {
 		log.Println("Prow Repository not found.")
 		log.Println("Installing Prow Repository")
 		if err := installProwRepo(kubeConfig); err != nil {
@@ -76,17 +78,17 @@ func installProw(cmd *cobra.Command, _ []string) error {
 	return nil
 }
 
-func checkProwRepo(kubeConfig string) error {
+func checkProwRepo(kubeConfig string) (*kappipkg.PackageRepository, error) {
 	tkgClient, err := tkgpackageclient.NewTKGPackageClient(kubeConfig)
 	if err != nil {
-		return fmt.Errorf("create TKG package client: %w", err)
+		return nil, fmt.Errorf("create TKG package client: %w", err)
 	}
 
-	_, err = tkgClient.GetRepository(repoOpts)
+	packageRepo, err := tkgClient.GetRepository(repoOpts)
 	if err != nil {
-		return err
+		return nil, err
 	}
-	return nil
+	return packageRepo, nil
 }
 
 func installProwRepo(kubeConfig string) error {

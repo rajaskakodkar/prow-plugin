@@ -11,6 +11,7 @@ require (
 	github.com/aunum/log v0.0.0-20200821225356-38d2e2c8b489
 	github.com/golangci/golangci-lint v1.43.0
 	github.com/spf13/cobra v1.3.0
+	github.com/vmware-tanzu/carvel-kapp-controller v0.25.0
 	github.com/vmware-tanzu/tanzu-framework v1.4.0-pre-alpha-2.0.20220119234741-712b1ad45604
 	k8s.io/api v0.22.2
 	k8s.io/apimachinery v0.22.2
@@ -235,7 +236,6 @@ require (
 	github.com/ultraware/whitespace v0.0.4 // indirect
 	github.com/uudashr/gocognit v1.0.5 // indirect
 	github.com/vito/go-interact v0.0.0-20171111012221-fa338ed9e9ec // indirect
-	github.com/vmware-tanzu/carvel-kapp-controller v0.25.0 // indirect
 	github.com/vmware-tanzu/carvel-secretgen-controller v0.5.0 // indirect
 	github.com/vmware-tanzu/carvel-vendir v0.23.0 // indirect
 	github.com/vmware/govmomi v0.27.1 // indirect

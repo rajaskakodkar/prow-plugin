@@ -2,14 +2,14 @@ package main
 
 import (
 	"context"
-	"fmt"
+	"log"
+	"path/filepath"
+	"strings"
+
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/util/homedir"
-	"log"
-	"path/filepath"
-	"strings"
 )
 
 var (
@@ -98,13 +98,13 @@ func CreateNewSecret(name string, fileSources, literalSources []string) error {
 	if err := createSecretsliteralSource(secret, literalSources); err != nil {
 		return err
 	}
-	result, err := secretsClient.Create(context.TODO(), secret, metav1.CreateOptions{})
+	_, err := secretsClient.Create(context.TODO(), secret, metav1.CreateOptions{})
 	if err != nil {
 		return err
 	}
 
 	// all good
-	fmt.Println(result)
+	//fmt.Println(result)
 	return nil
 }
 
