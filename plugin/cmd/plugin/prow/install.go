@@ -69,12 +69,17 @@ func installProw(cmd *cobra.Command, _ []string) error {
 		if err := installProwRepo(kubeConfig); err != nil {
 			return fmt.Errorf("install prow repo: %w", err)
 		}
+		// for {
+		// 	log.Println("Checking for Prow Repo status...")
+		// 	if packageRepo.Status.Fetch
+
+		// }
 		// todo(rajas): remove this debug line
-		log.Println(packageRepo.Status.ConsecutiveReconcileSuccesses)
+		log.Println(packageRepo.Status.Fetch)
 	} else {
 		log.Println("Prow Repository exists, continuing with package installation...")
 		// todo(rajas): remove this debug line
-		log.Println(packageRepo.Status.ConsecutiveReconcileSuccesses)
+		log.Println(packageRepo.Status.Fetch)
 	}
 
 	// Install packages
