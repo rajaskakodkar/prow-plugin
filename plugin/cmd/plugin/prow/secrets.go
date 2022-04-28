@@ -24,6 +24,7 @@ var (
 	githuboaSecret       = filepath.Join(homedir.HomeDir(), secretsFolder, "githubOAuth")
 	cookieSecret         = filepath.Join(homedir.HomeDir(), secretsFolder, "cookieSecret")
 	serviceAccountSecret = filepath.Join(homedir.HomeDir(), secretsFolder, "serviceAccount")
+	kubeconfigSecret     = filepath.Join(homedir.HomeDir(), secretsFolder, "kubeconfig")
 )
 
 func renderSecretSpec(name, namespace string) *corev1.Secret {
@@ -76,6 +77,11 @@ func createRequiredSecrets(kubeConfig string) error {
 		{
 			name:           "gcs-credentials",
 			fileSources:    []string{serviceAccountSecret},
+			literalSources: []string{},
+		},
+		{
+			name:           "kubeconfig",
+			fileSources:    []string{"config=" + kubeconfigSecret},
 			literalSources: []string{},
 		},
 	}
