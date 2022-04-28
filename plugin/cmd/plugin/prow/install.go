@@ -69,8 +69,12 @@ func installProw(cmd *cobra.Command, _ []string) error {
 		if err := installProwRepo(kubeConfig); err != nil {
 			return fmt.Errorf("install prow repo: %w", err)
 		}
+		// todo(rajas): remove this debug line
+		log.Println(packageRepo.Status.ConsecutiveReconcileSuccesses)
 	} else {
 		log.Println("Prow Repository exists, continuing with package installation...")
+		// todo(rajas): remove this debug line
+		log.Println(packageRepo.Status.ConsecutiveReconcileSuccesses)
 	}
 
 	// Install packages
@@ -97,18 +101,20 @@ func installProwRepo(kubeConfig string) error {
 		return fmt.Errorf("create TKG package client: %w", err)
 	}
 
-	// progress := &tkgpackagedatamodel.PackageProgress{
-	// 	ProgressMsg: make(chan string, 10),
-	// 	Err:         make(chan error),
-	// 	Done:        make(chan struct{}),
-	// }
+	progress := &tkgpackagedatamodel.PackageProgress{
+		ProgressMsg: make(chan string, 10),
+		Err:         make(chan error),
+		Done:        make(chan struct{}),
+	}
 
 	log.Println("Adding repository")
 
-	return tkgClient.AddRepositorySync(repoOpts, tkgpackagedatamodel.OperationTypeInstall)
-	// log.Println(receive(progress))
-
-	//return nil
+	go tkgClient.AddRepository(repoOpts, progress, tkgpackagedatamodel.OperationTypeInstall)
+	log.Println(receive(progress))
+	packageRepo, err := checkProwRepo(kubeConfig)
+	// todo(rajas): remove this debug line
+	log.Println(packageRepo.Status.ConsecutiveReconcileSuccesses)
+	return nil
 }
 
 func installProwPackages(kubeConfig string) {
