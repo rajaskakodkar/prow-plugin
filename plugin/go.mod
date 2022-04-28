@@ -12,6 +12,8 @@ require (
 	github.com/golangci/golangci-lint v1.43.0
 	github.com/spf13/cobra v1.3.0
 	github.com/vmware-tanzu/tanzu-framework v1.4.0-pre-alpha-2.0.20220119234741-712b1ad45604
+	k8s.io/api v0.22.2
+	k8s.io/apimachinery v0.22.2
 	k8s.io/client-go v0.22.2
 )
 
@@ -265,9 +267,7 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 	honnef.co/go/tools v0.2.1 // indirect
-	k8s.io/api v0.22.2 // indirect
 	k8s.io/apiextensions-apiserver v0.22.2 // indirect
-	k8s.io/apimachinery v0.22.2 // indirect
 	k8s.io/cluster-bootstrap v0.22.2 // indirect
 	k8s.io/component-base v0.22.2 // indirect
 	k8s.io/klog/v2 v2.10.0 // indirect

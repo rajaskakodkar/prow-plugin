@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/spf13/cobra"
 	"log"
+
+	"github.com/spf13/cobra"
 
 	"github.com/vmware-tanzu/tanzu-framework/pkg/v1/tkg/tkgpackageclient"
 	"github.com/vmware-tanzu/tanzu-framework/pkg/v1/tkg/tkgpackagedatamodel"
@@ -12,6 +13,7 @@ import (
 var (
 	createSecret    bool
 	createConfigmap bool
+	repo            = "public.ecr.aws/t0q8k6g2/repo/prow:0.1.0"
 )
 
 var InstallCmd = &cobra.Command{
@@ -21,6 +23,12 @@ var InstallCmd = &cobra.Command{
 	Example: `
 	tanzu prow install`,
 	RunE: installProw,
+}
+
+var repoOpts = &tkgpackagedatamodel.RepositoryOptions{
+	RepositoryURL:  repo,
+	RepositoryName: "prow",
+	Namespace:      "default",
 }
 
 func init() {
@@ -52,26 +60,38 @@ func installProw(cmd *cobra.Command, _ []string) error {
 	}
 
 	// Install repository
-	/*if err := installProwRepo(kubeConfig); err != nil {
-		return fmt.Errorf("install prow repo: %w", err)
-	}*/
+	err := checkProwRepo(kubeConfig)
+	if err != nil {
+		log.Println("Prow Repository not found.")
+		log.Println("Installing Prow Repository")
+		if err := installProwRepo(kubeConfig); err != nil {
+			return fmt.Errorf("install prow repo: %w", err)
+		}
+	}
+
 	// Install packages
 	installProwPackages(kubeConfig)
 	return nil
 }
 
-func installProwRepo(kubeConfig string) error {
-	repo := "public.ecr.aws/t0q8k6g2/repo/prow@sha256:03b1bd5e1c3ec75cd66984038307db7d9dd5c2e4cea65b13ff99f2b064b3a153"
-
+func checkProwRepo(kubeConfig string) error {
 	tkgClient, err := tkgpackageclient.NewTKGPackageClient(kubeConfig)
 	if err != nil {
 		return fmt.Errorf("create TKG package client: %w", err)
 	}
 
-	repoOpts := &tkgpackagedatamodel.RepositoryOptions{
-		RepositoryURL:  repo,
-		RepositoryName: "prow",
-		Namespace:      "default",
+	_, err = tkgClient.GetRepository(repoOpts)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func installProwRepo(kubeConfig string) error {
+
+	tkgClient, err := tkgpackageclient.NewTKGPackageClient(kubeConfig)
+	if err != nil {
+		return fmt.Errorf("create TKG package client: %w", err)
 	}
 
 	progress := &tkgpackagedatamodel.PackageProgress{
@@ -92,6 +112,14 @@ func installProwPackages(kubeConfig string) {
 
 	packages := []string{
 		"crier.prow.plugin",
+		"deck.prow.plugin",
+		"ghproxy.prow.plugin",
+		"hook.prow.plugin",
+		"horologium.prow.plugin",
+		"prow-cm.prow.plugin",
+		"sinker.prow.plugin",
+		"statusreconciler.prow.plugin",
+		"tide.prow.plugin",
 	}
 
 	for _, pkg := range packages {
