@@ -31,6 +31,7 @@ func renderConfigMapSpec(name, namespace string) *corev1.ConfigMap {
 			Name:      name,
 			Namespace: namespace,
 		},
+		Data: map[string]string{},
 	}
 }
 
