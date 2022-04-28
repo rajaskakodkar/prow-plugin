@@ -77,7 +77,7 @@ spec:
     spec:
       fetch:
         - imgpkgBundle:
-            image: public.ecr.aws/t0q8k6g2/prow-plugin/crier@sha256:2401e35b3ce3fd321f54d41462be2b2c3c367d7d039455648010f008f1d98930
+            image: public.ecr.aws/t0q8k6g2/prow-plugin/crier@sha256:f321e327d22599c0579b93604aa077498267c78d52390c1476abcc043a99a630
       template:
         - ytt:
             paths:
