@@ -139,9 +139,15 @@ func installProwPackages(kubeConfig string) {
 			Done:        make(chan struct{}),
 		}
 
-		log.Println("Install package")
+		// log.Println("Install package")
 		go tkgClient.InstallPackage(packageInstallOp, progress, tkgpackagedatamodel.OperationTypeInstall)
-		log.Println(receive(progress))
+		packageProgress := receive(progress)
+		if packageProgress == nil {
+			log.Println("Package Installed successfully!")
+		} else {
+			log.Println(packageProgress)
+		}
+
 	}
 }
 func receive(progress *tkgpackagedatamodel.PackageProgress) error {
