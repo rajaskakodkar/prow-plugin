@@ -69,6 +69,8 @@ func installProw(cmd *cobra.Command, _ []string) error {
 		}
 	}
 
+	log.Println("Prow Repository exists, continuing with package installation...")
+
 	// Install packages
 	installProwPackages(kubeConfig)
 	return nil
