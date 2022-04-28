@@ -2,14 +2,14 @@ package main
 
 import (
 	"context"
-	"fmt"
+	"log"
+	"path/filepath"
+	"strings"
+
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/util/homedir"
-	"log"
-	"path/filepath"
-	"strings"
 )
 
 var (
@@ -23,7 +23,8 @@ var (
 	githubSecret         = filepath.Join(homedir.HomeDir(), secretsFolder, "github")
 	githuboaSecret       = filepath.Join(homedir.HomeDir(), secretsFolder, "githubOAuth")
 	cookieSecret         = filepath.Join(homedir.HomeDir(), secretsFolder, "cookieSecret")
-	serviceAccountSecret = filepath.Join(homedir.HomeDir(), secretsFolder, "serviceAccount")
+	serviceAccountSecret = filepath.Join(homedir.HomeDir(), secretsFolder, "service-account.json")
+	kubeconfigSecret     = filepath.Join(homedir.HomeDir(), secretsFolder, "kubeconfig")
 )
 
 func renderSecretSpec(name, namespace string) *corev1.Secret {
@@ -78,6 +79,11 @@ func createRequiredSecrets(kubeConfig string) error {
 			fileSources:    []string{serviceAccountSecret},
 			literalSources: []string{},
 		},
+		{
+			name:           "kubeconfig",
+			fileSources:    []string{"config=" + kubeconfigSecret},
+			literalSources: []string{},
+		},
 	}
 	for _, secret := range secrets {
 		log.Printf("Creating a secret: %s", secret.name)
@@ -98,13 +104,13 @@ func CreateNewSecret(name string, fileSources, literalSources []string) error {
 	if err := createSecretsliteralSource(secret, literalSources); err != nil {
 		return err
 	}
-	result, err := secretsClient.Create(context.TODO(), secret, metav1.CreateOptions{})
+	_, err := secretsClient.Create(context.TODO(), secret, metav1.CreateOptions{})
 	if err != nil {
 		return err
 	}
 
 	// all good
-	fmt.Println(result)
+	//fmt.Println(result)
 	return nil
 }
 

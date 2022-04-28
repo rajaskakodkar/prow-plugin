@@ -2,8 +2,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/spf13/cobra"
 	"log"
+	"time"
+
+	"github.com/spf13/cobra"
+
+	kappipkg "github.com/vmware-tanzu/carvel-kapp-controller/pkg/apis/packaging/v1alpha1"
 
 	"github.com/vmware-tanzu/tanzu-framework/pkg/v1/tkg/tkgpackageclient"
 	"github.com/vmware-tanzu/tanzu-framework/pkg/v1/tkg/tkgpackagedatamodel"
@@ -12,6 +16,7 @@ import (
 var (
 	createSecret    bool
 	createConfigmap bool
+	repo            = "public.ecr.aws/t0q8k6g2/repo/prow:0.1.0"
 )
 
 var InstallCmd = &cobra.Command{
@@ -21,6 +26,12 @@ var InstallCmd = &cobra.Command{
 	Example: `
 	tanzu prow install`,
 	RunE: installProw,
+}
+
+var repoOpts = &tkgpackagedatamodel.RepositoryOptions{
+	RepositoryURL:  repo,
+	RepositoryName: "prow",
+	Namespace:      "default",
 }
 
 func init() {
@@ -52,26 +63,48 @@ func installProw(cmd *cobra.Command, _ []string) error {
 	}
 
 	// Install repository
-	/*if err := installProwRepo(kubeConfig); err != nil {
-		return fmt.Errorf("install prow repo: %w", err)
-	}*/
+	packageRepo, err := checkProwRepo(kubeConfig)
+	if err == nil && packageRepo == nil {
+		log.Println("Prow Repository not found.")
+		log.Println("Installing Prow Repository")
+		if err := installProwRepo(kubeConfig); err != nil {
+			return fmt.Errorf("install prow repo: %w", err)
+		}
+		for {
+			log.Println("Checking for Prow Repo status...")
+			if packageRepo.Status.GenericStatus.FriendlyDescription == "Reconcile succeeded" {
+				log.Println("Prow Repository Installed Successfully!")
+				break
+			} else {
+				time.Sleep(10 * time.Second)
+			}
+		}
+	} else {
+		log.Println("Prow Repository exists, continuing with package installation...")
+	}
+
 	// Install packages
 	installProwPackages(kubeConfig)
 	return nil
 }
 
+func checkProwRepo(kubeConfig string) (*kappipkg.PackageRepository, error) {
+	tkgClient, err := tkgpackageclient.NewTKGPackageClient(kubeConfig)
+	if err != nil {
+		return nil, fmt.Errorf("create TKG package client: %w", err)
+	}
+	packageRepo, err := tkgClient.GetRepository(repoOpts)
+	if err != nil {
+		return nil, err
+	}
+	return packageRepo, nil
+}
+
 func installProwRepo(kubeConfig string) error {
-	repo := "public.ecr.aws/t0q8k6g2/repo/prow@sha256:03b1bd5e1c3ec75cd66984038307db7d9dd5c2e4cea65b13ff99f2b064b3a153"
 
 	tkgClient, err := tkgpackageclient.NewTKGPackageClient(kubeConfig)
 	if err != nil {
 		return fmt.Errorf("create TKG package client: %w", err)
-	}
-
-	repoOpts := &tkgpackagedatamodel.RepositoryOptions{
-		RepositoryURL:  repo,
-		RepositoryName: "prow",
-		Namespace:      "default",
 	}
 
 	progress := &tkgpackagedatamodel.PackageProgress{
@@ -81,9 +114,12 @@ func installProwRepo(kubeConfig string) error {
 	}
 
 	log.Println("Adding repository")
+
 	go tkgClient.AddRepository(repoOpts, progress, tkgpackagedatamodel.OperationTypeInstall)
 	log.Println(receive(progress))
-
+	packageRepo, err := checkProwRepo(kubeConfig)
+	// todo(rajas): remove this debug line
+	log.Println(packageRepo.Status.ConsecutiveReconcileSuccesses)
 	return nil
 }
 
@@ -92,6 +128,14 @@ func installProwPackages(kubeConfig string) {
 
 	packages := []string{
 		"crier.prow.plugin",
+		"deck.prow.plugin",
+		"ghproxy.prow.plugin",
+		"hook.prow.plugin",
+		"horologium.prow.plugin",
+		"prow-cm.prow.plugin",
+		"sinker.prow.plugin",
+		"statusreconciler.prow.plugin",
+		"tide.prow.plugin",
 	}
 
 	for _, pkg := range packages {
@@ -109,9 +153,15 @@ func installProwPackages(kubeConfig string) {
 			Done:        make(chan struct{}),
 		}
 
-		log.Println("Install package")
+		// log.Println("Install package")
 		go tkgClient.InstallPackage(packageInstallOp, progress, tkgpackagedatamodel.OperationTypeInstall)
-		log.Println(receive(progress))
+		packageProgress := receive(progress)
+		if packageProgress == nil {
+			log.Println("Package Installed successfully!")
+		} else {
+			log.Println(packageProgress)
+		}
+
 	}
 }
 func receive(progress *tkgpackagedatamodel.PackageProgress) error {
