@@ -73,11 +73,8 @@ func installProw(cmd *cobra.Command, _ []string) error {
 		for {
 			log.Println("Checking for Prow Repo status...")
 			packageRepo, _ := checkProwRepo(kubeConfig)
-			for _, t := range packageRepo.Status.Conditions {
-				if t.Status == "True" && t.Type == "ReconcileSucceeded" {
-					log.Println("Prow Repository Installed Successfully!")
-					break
-				}
+			if waitforpackagerepo(packageRepo) {
+				break
 			}
 			time.Sleep(10 * time.Second)
 		}
@@ -88,6 +85,17 @@ func installProw(cmd *cobra.Command, _ []string) error {
 	// Install packages
 	installProwPackages(kubeConfig)
 	return nil
+}
+
+func waitforpackagerepo(packageRepo *kappipkg.PackageRepository) bool {
+	for _, t := range packageRepo.Status.Conditions {
+		if t.Status == "True" && t.Type == "ReconcileSucceeded" {
+			log.Println("Prow Repository Installed Successfully!")
+			return true
+		}
+
+	}
+	return false
 }
 
 func checkProwRepo(kubeConfig string) (*kappipkg.PackageRepository, error) {
