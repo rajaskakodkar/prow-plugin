@@ -23,7 +23,7 @@ var (
 	githubSecret         = filepath.Join(homedir.HomeDir(), secretsFolder, "github")
 	githuboaSecret       = filepath.Join(homedir.HomeDir(), secretsFolder, "githubOAuth")
 	cookieSecret         = filepath.Join(homedir.HomeDir(), secretsFolder, "cookieSecret")
-	serviceAccountSecret = filepath.Join(homedir.HomeDir(), secretsFolder, "serviceAccount")
+	serviceAccountSecret = filepath.Join(homedir.HomeDir(), secretsFolder, "service-account.json")
 	kubeconfigSecret     = filepath.Join(homedir.HomeDir(), secretsFolder, "kubeconfig")
 )
 
