@@ -13,6 +13,7 @@ var (
 	createSecret    bool
 	createConfigmap bool
 )
+
 var InstallCmd = &cobra.Command{
 	Use:   "install",
 	Short: "install Prow, its repo, its packages, and prerequisite secrets",
@@ -49,19 +50,26 @@ func installProw(cmd *cobra.Command, _ []string) error {
 			panic(err)
 		}
 	}
+
 	// Install repository
-	if err := installProwRepo(kubeConfig); err != nil {
+	/*if err := installProwRepo(kubeConfig); err != nil {
 		return fmt.Errorf("install prow repo: %w", err)
-	}
-
+	}*/
 	// Install packages
-
+	installProwPackages(kubeConfig)
 	return nil
 }
 
 func installProwRepo(kubeConfig string) error {
+	repo := "public.ecr.aws/t0q8k6g2/repo/prow@sha256:03b1bd5e1c3ec75cd66984038307db7d9dd5c2e4cea65b13ff99f2b064b3a153"
+
+	tkgClient, err := tkgpackageclient.NewTKGPackageClient(kubeConfig)
+	if err != nil {
+		return fmt.Errorf("create TKG package client: %w", err)
+	}
+
 	repoOpts := &tkgpackagedatamodel.RepositoryOptions{
-		RepositoryURL:  "public.ecr.aws/t0q8k6g2/repo/prow@sha256:03b1bd5e1c3ec75cd66984038307db7d9dd5c2e4cea65b13ff99f2b064b3a153",
+		RepositoryURL:  repo,
 		RepositoryName: "prow",
 		Namespace:      "default",
 	}
@@ -72,23 +80,48 @@ func installProwRepo(kubeConfig string) error {
 		Done:        make(chan struct{}),
 	}
 
-	tkgPkgClient, err := tkgpackageclient.NewTKGPackageClient(kubeConfig)
-	if err != nil {
-		return fmt.Errorf("create TKG package client: %w", err)
-	}
-
 	log.Println("Adding repository")
-	tkgPkgClient.AddRepository(repoOpts, progress, tkgpackagedatamodel.OperationTypeInstall)
-	fmt.Println(receive(progress))
+	go tkgClient.AddRepository(repoOpts, progress, tkgpackagedatamodel.OperationTypeInstall)
+	log.Println(receive(progress))
+
 	return nil
 }
 
+func installProwPackages(kubeConfig string) {
+	tkgClient, _ := tkgpackageclient.NewTKGPackageClient(kubeConfig)
+
+	packages := []string{
+		"crier.prow.plugin",
+	}
+
+	for _, pkg := range packages {
+		log.Printf("Installing package: %v\n", pkg)
+
+		var packageInstallOp = tkgpackagedatamodel.NewPackageOptions()
+		packageInstallOp.PkgInstallName = pkg
+		packageInstallOp.PackageName = pkg
+		packageInstallOp.Namespace = "default"
+		packageInstallOp.Version = "0.1.0"
+
+		progress := &tkgpackagedatamodel.PackageProgress{
+			ProgressMsg: make(chan string, 10),
+			Err:         make(chan error),
+			Done:        make(chan struct{}),
+		}
+
+		log.Println("Install package")
+		go tkgClient.InstallPackage(packageInstallOp, progress, tkgpackagedatamodel.OperationTypeInstall)
+		log.Println(receive(progress))
+	}
+}
 func receive(progress *tkgpackagedatamodel.PackageProgress) error {
 	for {
 		select {
 		case err := <-progress.Err:
+			log.Println("ERROR")
 			return err
-		case <-progress.ProgressMsg:
+		case msg := <-progress.ProgressMsg:
+			log.Println(msg)
 			continue
 		case <-progress.Done:
 			return nil
