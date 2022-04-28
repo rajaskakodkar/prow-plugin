@@ -1,10 +1,6 @@
 #@data/values
 ---
 
-#! The namespace in which to deploy crier.
-namespace: prow
+#! User configurable values for deck.
 
-#! The amount of replicas that should exist in crier.
-runtime:
-  replicas: 1
-
+foo: bar
