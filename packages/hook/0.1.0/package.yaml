@@ -1,18 +1,18 @@
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
-  name: statusreconciler.prow.plugin.0.1.0
+  name: hook.prow.plugin.0.1.0
 spec:
-  refName: statusreconciler.prow.plugin
+  refName: hook.prow.plugin
   version: 0.1.0
-  releaseNotes: "status reconciler release"
+  releaseNotes: "relevant release notes..."
   licenses:
     - "UNKNOWN"
   template:
     spec:
       fetch:
         - imgpkgBundle:
-            image: public.ecr.aws/t0q8k6g2/prow-plugin/statusreconciler@sha256:3b5e7e682892ef12ba6685183557bdbace8b09ecb3a400881217aa436e802491
+            image: public.ecr.aws/t0q8k6g2/prow-plugin/hook@sha256:632391aa30bbcbf20223c8678e712473f236df8c6740ea758fe7973ba8f084fd
       template:
         - ytt:
             paths:

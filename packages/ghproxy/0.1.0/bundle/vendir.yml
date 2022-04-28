@@ -4,8 +4,6 @@ minimumRequiredVersion: 0.12.0
 directories:
   - path: config/upstream
     contents:
-      - path: crier_deployment.yaml
-        manual: {}
-      - path: crier_rbac.yaml
+      - path: ghproxy_deployment.yaml
         manual: {}
 

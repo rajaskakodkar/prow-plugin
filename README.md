@@ -45,4 +45,21 @@ Lock the image digest from the repo
 
 ### Push the imgpkg to the repository
 
+Push the package bundle to public.ecr.aws/t0q8k6g2/prow-plugin
+
+```
+hack/push-package.sh hook 0.1.0
+```
+
 #### Save the imgpkg hash
+
+Save the imgpkg has from the above command output and update packages/${package}/${version}/package.yaml
+
+### Push repo bundle
+
+Update repo bundle in repos/prow.yaml.
+
+```
+cd hack
+go run generate-package-repository.go prow 0.1.0
+```

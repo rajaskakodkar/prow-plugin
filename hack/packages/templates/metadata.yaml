@@ -1,7 +1,7 @@
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: PackageMetadata
 metadata:
-  name: PACKAGE_NAME.community.tanzu.vmware.com
+  name: PACKAGE_NAME.prow.plugin
 spec:
   displayName: "PACKAGE_NAME"
   longDescription: ""

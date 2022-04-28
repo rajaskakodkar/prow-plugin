@@ -1,7 +1,7 @@
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: PackageMetadata
 metadata:
-  name: tide.community.tanzu.vmware.com
+  name: tide.prow.plugin
 spec:
   displayName: "tide"
   longDescription: "PROW tide"

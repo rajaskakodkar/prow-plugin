@@ -6,6 +6,7 @@ spec:
   displayName: "crier"
   longDescription: "Prow Component"
   shortDescription: "prow component"
+  providerName: VMware
   maintainers:
     - name: Rajas Kakodkar
   categories:

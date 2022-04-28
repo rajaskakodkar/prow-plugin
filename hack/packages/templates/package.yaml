@@ -1,9 +1,9 @@
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
-  name: PACKAGE_NAME.community.tanzu.vmware.com.VERSION
+  name: PACKAGE_NAME.prow.plugin.VERSION
 spec:
-  refName: PACKAGE_NAME.community.tanzu.vmware.com
+  refName: PACKAGE_NAME.prow.plugin
   version: VERSION
   releaseNotes: "relevant release notes..."
   licenses:

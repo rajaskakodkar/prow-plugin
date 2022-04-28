@@ -2,9 +2,30 @@
 apiVersion: imgpkg.carvel.dev/v1alpha1
 images:
 - annotations:
-    kbld.carvel.dev/id: public.ecr.aws/t0q8k6g2/prow-plugin/crier@sha256:94ef0bf08043d403c7e22585747a497e98a0629308b226c56847a1e5aa6f6107
-  image: public.ecr.aws/t0q8k6g2/prow-plugin/crier@sha256:94ef0bf08043d403c7e22585747a497e98a0629308b226c56847a1e5aa6f6107
+    kbld.carvel.dev/id: public.ecr.aws/t0q8k6g2/prow-plugin/crier@sha256:2401e35b3ce3fd321f54d41462be2b2c3c367d7d039455648010f008f1d98930
+  image: public.ecr.aws/t0q8k6g2/prow-plugin/crier@sha256:2401e35b3ce3fd321f54d41462be2b2c3c367d7d039455648010f008f1d98930
 - annotations:
-    kbld.carvel.dev/id: public.ecr.aws/t0q8k6g2/prow-plugin/deck@sha256:6482e2e473b69240e98f063948576f8bcccf4689d8e653b0c84df9909baa9f33
-  image: public.ecr.aws/t0q8k6g2/prow-plugin/deck@sha256:6482e2e473b69240e98f063948576f8bcccf4689d8e653b0c84df9909baa9f33
+    kbld.carvel.dev/id: public.ecr.aws/t0q8k6g2/prow-plugin/deck@sha256:d505c02eed1f29acea0c487337a357cbecf2b34644e98cacdaa240217e4f8be2
+  image: public.ecr.aws/t0q8k6g2/prow-plugin/deck@sha256:d505c02eed1f29acea0c487337a357cbecf2b34644e98cacdaa240217e4f8be2
+- annotations:
+    kbld.carvel.dev/id: public.ecr.aws/t0q8k6g2/prow-plugin/ghproxy@sha256:db4146b89746b3f46e35ae0e2ac61a8883d9b2b6e0ddc49d49f7a3e0c87d05b9
+  image: public.ecr.aws/t0q8k6g2/prow-plugin/ghproxy@sha256:db4146b89746b3f46e35ae0e2ac61a8883d9b2b6e0ddc49d49f7a3e0c87d05b9
+- annotations:
+    kbld.carvel.dev/id: public.ecr.aws/t0q8k6g2/prow-plugin/hook@sha256:632391aa30bbcbf20223c8678e712473f236df8c6740ea758fe7973ba8f084fd
+  image: public.ecr.aws/t0q8k6g2/prow-plugin/hook@sha256:632391aa30bbcbf20223c8678e712473f236df8c6740ea758fe7973ba8f084fd
+- annotations:
+    kbld.carvel.dev/id: public.ecr.aws/t0q8k6g2/prow-plugin/horologium@sha256:f470c56f35322df476ced88c3d3f525f984b411d996fb7a250dbb99d86e353ae
+  image: public.ecr.aws/t0q8k6g2/prow-plugin/horologium@sha256:f470c56f35322df476ced88c3d3f525f984b411d996fb7a250dbb99d86e353ae
+- annotations:
+    kbld.carvel.dev/id: public.ecr.aws/t0q8k6g2/prow-plugin/prow-cm@sha256:7ac2812d3aba3ff6affa1cb383d68889c0e54d1c0a9b3c7e00ee03ebe5e91768
+  image: public.ecr.aws/t0q8k6g2/prow-plugin/prow-cm@sha256:7ac2812d3aba3ff6affa1cb383d68889c0e54d1c0a9b3c7e00ee03ebe5e91768
+- annotations:
+    kbld.carvel.dev/id: public.ecr.aws/t0q8k6g2/prow-plugin/sinker@sha256:d46ccdff7265c7f6d0ed3626b758c739bf76c11ee8f8505fcca88e9945b59fd8
+  image: public.ecr.aws/t0q8k6g2/prow-plugin/sinker@sha256:d46ccdff7265c7f6d0ed3626b758c739bf76c11ee8f8505fcca88e9945b59fd8
+- annotations:
+    kbld.carvel.dev/id: public.ecr.aws/t0q8k6g2/prow-plugin/statusreconciler@sha256:3b5e7e682892ef12ba6685183557bdbace8b09ecb3a400881217aa436e802491
+  image: public.ecr.aws/t0q8k6g2/prow-plugin/statusreconciler@sha256:3b5e7e682892ef12ba6685183557bdbace8b09ecb3a400881217aa436e802491
+- annotations:
+    kbld.carvel.dev/id: public.ecr.aws/t0q8k6g2/prow-plugin/tide@sha256:91c410753f17a8bd87c0d9b646d295df86110225b5e3dc86ad24a12586564849
+  image: public.ecr.aws/t0q8k6g2/prow-plugin/tide@sha256:91c410753f17a8bd87c0d9b646d295df86110225b5e3dc86ad24a12586564849
 kind: ImagesLock

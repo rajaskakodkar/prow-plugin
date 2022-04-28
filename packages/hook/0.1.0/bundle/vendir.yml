@@ -4,8 +4,12 @@ minimumRequiredVersion: 0.12.0
 directories:
   - path: config/upstream
     contents:
-      - path: crier_deployment.yaml
+      - path: hook_deployment.yaml
         manual: {}
-      - path: crier_rbac.yaml
+      - path: hook_rbac.yaml
         manual: {}
+
+
+
+
 

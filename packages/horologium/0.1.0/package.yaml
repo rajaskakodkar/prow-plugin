@@ -1,9 +1,9 @@
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
-  name: horologium.community.tanzu.vmware.com.0.1.0
+  name: horologium.prow.plugin.0.1.0
 spec:
-  refName: horologium.community.tanzu.vmware.com
+  refName: horologium.prow.plugin
   version: 0.1.0
   releaseNotes: "relevant release notes..."
   licenses:
@@ -12,7 +12,7 @@ spec:
     spec:
       fetch:
         - imgpkgBundle:
-            image: # Get this value by pushing to your OCI Registry
+            image: public.ecr.aws/t0q8k6g2/prow-plugin/horologium@sha256:f470c56f35322df476ced88c3d3f525f984b411d996fb7a250dbb99d86e353ae
       template:
         - ytt:
             paths:

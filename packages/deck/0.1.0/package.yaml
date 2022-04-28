@@ -1,9 +1,9 @@
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
-  name: deck.community.tanzu.vmware.com.0.1.0
+  name: deck.prow.plugin.0.1.0
 spec:
-  refName: deck.community.tanzu.vmware.com
+  refName: deck.prow.plugin
   version: 0.1.0
   releaseNotes: "relevant release notes..."
   licenses:
@@ -12,7 +12,7 @@ spec:
     spec:
       fetch:
         - imgpkgBundle:
-            image: public.ecr.aws/t0q8k6g2/prow-plugin/deck@sha256:6482e2e473b69240e98f063948576f8bcccf4689d8e653b0c84df9909baa9f33
+            image: public.ecr.aws/t0q8k6g2/prow-plugin/deck@sha256:d505c02eed1f29acea0c487337a357cbecf2b34644e98cacdaa240217e4f8be2
       template:
         - ytt:
             paths:

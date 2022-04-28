@@ -1,0 +1,7 @@
+---
+apiVersion: imgpkg.carvel.dev/v1alpha1
+images:
+- annotations:
+    kbld.carvel.dev/id: gcr.io/k8s-prow/hook:v20220331-c4e1c201d5
+  image: gcr.io/k8s-prow/hook@sha256:b4089ade97ec541966d56f8d8ac5a13d98e3d7f4417e691a81c1ba982d51de5f
+kind: ImagesLock

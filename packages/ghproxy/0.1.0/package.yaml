@@ -1,18 +1,18 @@
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
-  name: statusreconciler.prow.plugin.0.1.0
+  name: ghproxy.prow.plugin.0.1.0
 spec:
-  refName: statusreconciler.prow.plugin
+  refName: ghproxy.prow.plugin
   version: 0.1.0
-  releaseNotes: "status reconciler release"
+  releaseNotes: "relevant release notes..."
   licenses:
     - "UNKNOWN"
   template:
     spec:
       fetch:
         - imgpkgBundle:
-            image: public.ecr.aws/t0q8k6g2/prow-plugin/statusreconciler@sha256:3b5e7e682892ef12ba6685183557bdbace8b09ecb3a400881217aa436e802491
+            image: public.ecr.aws/t0q8k6g2/prow-plugin/ghproxy@sha256:db4146b89746b3f46e35ae0e2ac61a8883d9b2b6e0ddc49d49f7a3e0c87d05b9
       template:
         - ytt:
             paths:

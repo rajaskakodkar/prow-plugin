@@ -1,7 +1,7 @@
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: PackageMetadata
 metadata:
-  name: sinker.community.tanzu.vmware.com
+  name: sinker.prow.plugin
 spec:
   displayName: "sinker"
   longDescription: "PROW Sinker"

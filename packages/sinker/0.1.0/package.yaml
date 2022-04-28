@@ -1,9 +1,9 @@
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
-  name: sinker.community.tanzu.vmware.com.0.1.0
+  name: sinker.prow.plugin.0.1.0
 spec:
-  refName: sinker.community.tanzu.vmware.com
+  refName: sinker.prow.plugin
   version: 0.1.0
   releaseNotes: "relevant release notes..."
   licenses:
@@ -12,7 +12,7 @@ spec:
     spec:
       fetch:
         - imgpkgBundle:
-            image: # Get this value by pushing to your OCI Registry
+            image: public.ecr.aws/t0q8k6g2/prow-plugin/sinker@sha256:d46ccdff7265c7f6d0ed3626b758c739bf76c11ee8f8505fcca88e9945b59fd8
       template:
         - ytt:
             paths:

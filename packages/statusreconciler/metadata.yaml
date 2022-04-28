@@ -1,7 +1,7 @@
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: PackageMetadata
 metadata:
-  name: statusreconciler.community.tanzu.vmware.com
+  name: statusreconciler.prow.plugin
 spec:
   displayName: "statusreconciler"
   longDescription: "PROW Status Reconciler"

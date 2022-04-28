@@ -1,9 +1,9 @@
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: PackageMetadata
 metadata:
-  name: deck.prow.plugin
+  name: ghproxy.prow.plugin
 spec:
-  displayName: "deck"
+  displayName: "ghproxy"
   longDescription: ""
   shortDescription: ""
   providerName: VMware

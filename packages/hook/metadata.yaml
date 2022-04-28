@@ -1,9 +1,9 @@
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: PackageMetadata
 metadata:
-  name: deck.prow.plugin
+  name: hook.prow.plugin
 spec:
-  displayName: "deck"
+  displayName: "hook"
   longDescription: ""
   shortDescription: ""
   providerName: VMware

@@ -1,7 +1,7 @@
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: PackageMetadata
 metadata:
-  name: horologium.community.tanzu.vmware.com
+  name: horologium.prow.plugin
 spec:
   displayName: "horologium"
   longDescription: ""

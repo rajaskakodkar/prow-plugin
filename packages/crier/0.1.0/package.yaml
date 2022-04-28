@@ -22,7 +22,7 @@ spec:
     spec:
       fetch:
         - imgpkgBundle:
-            image: public.ecr.aws/t0q8k6g2/prow-plugin/crier@sha256:94ef0bf08043d403c7e22585747a497e98a0629308b226c56847a1e5aa6f6107
+            image: public.ecr.aws/t0q8k6g2/prow-plugin/crier@sha256:2401e35b3ce3fd321f54d41462be2b2c3c367d7d039455648010f008f1d98930
       template:
         - ytt:
             paths:

@@ -1,9 +1,9 @@
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
-  name: prow-cm.community.tanzu.vmware.com.0.1.0
+  name: prow-cm.prow.plugin.0.1.0
 spec:
-  refName: prow-cm.community.tanzu.vmware.com
+  refName: prow-cm.prow.plugin
   version: 0.1.0
   releaseNotes: "relevant release notes..."
   licenses:
@@ -12,7 +12,7 @@ spec:
     spec:
       fetch:
         - imgpkgBundle:
-            image: # Get this value by pushing to your OCI Registry
+            image: public.ecr.aws/t0q8k6g2/prow-plugin/prow-cm@sha256:7ac2812d3aba3ff6affa1cb383d68889c0e54d1c0a9b3c7e00ee03ebe5e91768
       template:
         - ytt:
             paths:

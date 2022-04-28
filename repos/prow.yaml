@@ -20,4 +20,10 @@ packages:
   - name: tide
     versions:
       - 0.1.0
+  - name: hook
+    versions:
+      - 0.1.0
+  - name: ghproxy
+    versions:
+      - 0.1.0
 

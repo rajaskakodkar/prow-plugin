@@ -1,7 +1,7 @@
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: PackageMetadata
 metadata:
-  name: prow-cm.community.tanzu.vmware.com
+  name: prow-cm.prow.plugin
 spec:
   displayName: "prow-cm"
   longDescription: "Prow Controller Manager"

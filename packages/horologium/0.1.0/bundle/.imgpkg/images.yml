@@ -3,9 +3,5 @@ apiVersion: imgpkg.carvel.dev/v1alpha1
 images:
 - annotations:
     kbld.carvel.dev/id: gcr.io/k8s-prow/horologium:v20220331-c4e1c201d5
-    kbld.carvel.dev/origins: |
-      - resolved:
-          tag: v20220331-c4e1c201d5
-          url: gcr.io/k8s-prow/horologium:v20220331-c4e1c201d5
   image: gcr.io/k8s-prow/horologium@sha256:053b67edf65e7eb2786ba8ae42484616d747c929f67eb45977b7a6da79792dab
 kind: ImagesLock

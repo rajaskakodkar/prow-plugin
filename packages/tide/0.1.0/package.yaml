@@ -1,9 +1,9 @@
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
-  name: tide.community.tanzu.vmware.com.0.1.0
+  name: tide.prow.plugin.0.1.0
 spec:
-  refName: tide.community.tanzu.vmware.com
+  refName: tide.prow.plugin
   version: 0.1.0
   releaseNotes: "tide release"
   licenses:
@@ -12,7 +12,7 @@ spec:
     spec:
       fetch:
         - imgpkgBundle:
-            image: # Get this value by pushing to your OCI Registry
+            image: public.ecr.aws/t0q8k6g2/prow-plugin/tide@sha256:91c410753f17a8bd87c0d9b646d295df86110225b5e3dc86ad24a12586564849
       template:
         - ytt:
             paths:
