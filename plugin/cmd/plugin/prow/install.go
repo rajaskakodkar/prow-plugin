@@ -72,6 +72,7 @@ func installProw(cmd *cobra.Command, _ []string) error {
 		}
 		for {
 			log.Println("Checking for Prow Repo status...")
+			packageRepo, _ := checkProwRepo(kubeConfig)
 			for _, t := range packageRepo.Status.Conditions {
 				if t.Status == "True" && t.Type == "ReconcileSucceeded" {
 					log.Println("Prow Repository Installed Successfully!")
