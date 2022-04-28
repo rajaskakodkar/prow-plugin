@@ -72,12 +72,13 @@ func installProw(cmd *cobra.Command, _ []string) error {
 		}
 		for {
 			log.Println("Checking for Prow Repo status...")
-			if packageRepo.Status.GenericStatus.FriendlyDescription == "Reconcile succeeded" {
-				log.Println("Prow Repository Installed Successfully!")
-				break
-			} else {
-				time.Sleep(10 * time.Second)
+			for _, t := range packageRepo.Status.Conditions {
+				if t.Status == "True" && t.Type == "ReconcileSucceeded" {
+					log.Println("Prow Repository Installed Successfully!")
+					break
+				}
 			}
+			time.Sleep(10 * time.Second)
 		}
 	} else {
 		log.Println("Prow Repository exists, continuing with package installation...")
